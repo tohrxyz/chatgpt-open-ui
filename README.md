@@ -1,7 +1,7 @@
 # chatgpt-open-ui
 An open UI frontend for ChatGPT API from OpenAI
 
-<img src="https://github.com/tohrxyz/chatgpt-open-ui/blob/main/react-web/src/media/screenshot.png"/>
+<img src="https://github.com/tohrxyz/chatgpt-open-ui/blob/main/react-web/src/media/screenshot.png" width="500px"/>
 
 # How to use?
   1. Clone this repository with ``git clone``
