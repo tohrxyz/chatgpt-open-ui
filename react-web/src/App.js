@@ -6,11 +6,12 @@ function App() {
   const [apiKey, setApiKey] = useState("");
   const [inputText, setInputText] = useState("");
   const [result, setResult] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    onSubmit(apiKey, inputText, setResult);
+
+    onSubmit(apiKey, inputText, setResult, setIsLoading);
   }
   return (
     <div className="container mx-auto py-4 max-w-3xl">
@@ -39,6 +40,7 @@ function App() {
           Submit
         </button>
       </form>
+      {isLoading && <div className="border border-gray-400 p-4 mt-4 mx-4">Loading...</div>}
       {result && (
         <div className="border border-gray-400 p-4 mt-4 mx-4">
           <h2 className="font-bold mb-2">Result:</h2>
