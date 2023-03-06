@@ -91,7 +91,7 @@ function App() {
       {/* result display */}
       <div>
         {result && (
-          <h2 className="font-bold mb-2 mx-4 mt-6">Result:</h2>
+          <h2 className="font-bold mb-2 mx-4 mt-6">Result</h2>
         )}
         {result && (
           <div className="border-2 rounded-xl border-blue-400 p-4 mt-2 mx-4">
