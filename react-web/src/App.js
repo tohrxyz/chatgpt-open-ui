@@ -1,5 +1,6 @@
 import './App.css';
 import { useState } from 'react'
+import onSubmit from './api/api';
 
 function App() {
   const [apiKey, setApiKey] = useState("");
@@ -8,7 +9,8 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setResult("API key: " + apiKey + "\n Prompt: " + inputText);
+    
+    onSubmit(apiKey, inputText, setResult);
   }
   return (
     <div className="container mx-auto py-4 max-w-3xl">
