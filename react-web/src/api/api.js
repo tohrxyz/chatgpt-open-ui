@@ -16,8 +16,7 @@ export default async function onSubmit(apiKey, inputText, setResult) {
     });
 
     const txt = completion.data.choices[0].message.content;
-
-    setResult(txt);
+    setResult(txt.trimStart());
   } catch(error) {
     console.error(error);
     alert(error.message);
