@@ -10,18 +10,14 @@ export default async function onSubmit(apiKey, inputText, setResult) {
 
     const openai = new OpenAIApi(configuration);
 
-    const response = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: inputText,
-      temperature: 0,
-      max_tokens: 256,
+    const completion = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: [{role: "user", content: inputText}],
     });
 
-    const txt = response.data.choices[0].text;
+    const txt = completion.data.choices[0].message.content;
 
-    const prettyString = txt.trimStart().replace(/#/g, "\n-");
-
-    setResult(prettyString.trimStart());
+    setResult(txt);
   } catch(error) {
     console.error(error);
     alert(error.message);
