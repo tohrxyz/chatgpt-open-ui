@@ -66,8 +66,8 @@ function App() {
           id="input-text"
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          className="border-2 rounded-xl border-blue-500 p-2 mb-10 h-auto max-h-none resize-none"
-          rows="6"
+          className="border-2 rounded-xl border-blue-500 p-3 mb-10 h-auto max-h-none resize-none"
+          rows={6}
         ></textarea>
 
         {/* handles button submit */}
@@ -95,12 +95,11 @@ function App() {
         )}
         {result && (
           <div className="border-2 rounded-xl border-blue-400 p-4 mt-2 mx-4">
-            <p>{result}</p>
+            <div className="whitespace-pre-line">{result}</div>
           </div>
         )}
       </div>
 
-      
     </div>
   );
 }
