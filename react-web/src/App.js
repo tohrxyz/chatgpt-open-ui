@@ -2,6 +2,7 @@ import './App.css';
 import { useState } from 'react'
 import onSubmit from './api/api';
 import HashLoader from 'react-spinners/HashLoader';
+import parseMarkdown from './parseMsg/parseMarkdown';
 
 function App() {
   const [apiKey, setApiKey] = useState("");
@@ -12,10 +13,11 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    onSubmit(apiKey, inputText, setResult).then(() => {
-      setLoading(false);
-    });
+    // setLoading(true);
+    // onSubmit(apiKey, inputText, setResult).then(() => {
+    //   setLoading(false);
+    // });
+    setResult(parseMarkdown(inputText));
   }
 
   // overrides default css for HashLoader spinner
