@@ -1,8 +1,8 @@
 import './App.css';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import onSubmit from './api/api';
 import HashLoader from 'react-spinners/HashLoader';
-import parseMarkdown from './parseMsg/parseMarkdown';
+import parseMarkdown from './parseMarkdown/parseMarkdown';
 
 function App() {
   const [apiKey, setApiKey] = useState("");
@@ -10,14 +10,20 @@ function App() {
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(false);
+  const [parsedResult, setParsedResult] = useState("");
+
+  // each time a result is recieved from the API,
+  // parses it from plain text to elements
+  useEffect(() => {
+    setParsedResult(parseMarkdown(result));
+  }, [result]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setLoading(true);
-    // onSubmit(apiKey, inputText, setResult).then(() => {
-    //   setLoading(false);
-    // });
-    setResult(parseMarkdown(inputText));
+    setLoading(true);
+    onSubmit(apiKey, inputText, setResult).then(() => {
+      setLoading(false);
+    });
   }
 
   // overrides default css for HashLoader spinner
@@ -97,7 +103,7 @@ function App() {
         )}
         {result && (
           <div className="border-2 rounded-xl border-blue-400 p-4 mt-2 mx-4">
-            <div className="whitespace-pre-line">{result}</div>
+            <div className="whitespace-pre-line">{parsedResult}</div>
           </div>
         )}
       </div>
