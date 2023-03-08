@@ -41,7 +41,7 @@ function App() {
   }
 
   return (
-    <div className="container mx-auto py-4 max-w-3xl">
+    <div className="container mx-auto py-4 px-4 max-w-3xl h-screen bg-[#2c2b2b]">
 
       {/* title */}
       <h1 className="text-4xl font-bold mb-4 text-center">ChatGPT Open UI</h1>
@@ -56,7 +56,7 @@ function App() {
           id="api-key"
           value={apiKey}
           onChange={(e) => setApiKey(e.target.value)}
-          className="border-2 rounded border-blue-400 p-2 mb-1"
+          className="border-2 rounded border-white bg-[#1e1e1e] p-2 mb-1"
         />
         {/* handles show api key on/off */}
         <div className="text-end">
@@ -74,13 +74,13 @@ function App() {
           id="input-text"
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          className="border-2 rounded-xl border-blue-500 p-3 mb-10 h-auto max-h-none resize-none"
+          className="border-2 rounded-xl border-white bg-[#1e1e1e] p-3 mb-10 h-auto max-h-none resize-none"
           rows={6}
         ></textarea>
 
         {/* handles button submit */}
         <div className="flex justify-center">
-          <button type="submit" className="bg-blue-500 text-white py-3 px-4 rounded text-center w-60 flex justify-center" disabled={loading}>
+          <button type="submit" className="border-2 rounded-xl bg-[#1e1e1e] border-white text-white py-3 px-4 rounded text-center w-60 flex justify-center" disabled={loading}>
             
             {/* when loading spinner is displayed, otherwise button is enabled */}
             {loading ? 
@@ -97,13 +97,13 @@ function App() {
       </form>
       
       {/* result display */}
-      <div>
+      <div className='bg-[#2c2b2b] -mx-4'>
         {result && (
-          <h2 className="font-bold mb-2 mx-4 mt-6">Result</h2>
+          <h2 className="font-bold mb-2 mx-4 mt-6 text-white">Result</h2>
         )}
         {result && (
-          <div className="border-2 rounded-xl border-blue-400 p-4 mt-2 mx-4">
-            <div className="whitespace-pre-line">{parsedResult}</div>
+          <div className="p-4 mt-2 mx-4 rounded-md text-white">
+            <div className="whitespace-pre-line text-white">{parsedResult}</div>
           </div>
         )}
       </div>
