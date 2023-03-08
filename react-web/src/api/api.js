@@ -10,13 +10,15 @@ export default async function onSubmit(apiKey, inputText, setResult) {
 
     const openai = new OpenAIApi(configuration);
 
+    let codeAddition = " specify language behind after starting ```";
+
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
-      messages: [{role: "user", content: inputText + " if code then respond with ```language at start of codeblock"}],
+      messages: [{role: "user", content: inputText + codeAddition}],
     });
 
     const txt = completion.data.choices[0].message.content;
-    // console.log(txt);
+    console.log(txt);
     setResult(txt.trimStart());
   } catch(error) {
     console.error(error);
