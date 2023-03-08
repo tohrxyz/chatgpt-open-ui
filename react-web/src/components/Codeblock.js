@@ -11,17 +11,17 @@ export default function Codeblock(props) {
 
   const handleClick = () => {
     setCopied(true);
-    console.log(copied);
+  
     navigator.clipboard.writeText(props.children);
     setTimeout(() => {
       setCopied(false);
-      console.log(copied);
     }, 3000);
   }
 
   return (
     <pre>
         <div className='flex justify-between text-sm py-1 px-4 -m-4 mb-4 bg-gray-700 text-gray-300 rounded-sm'>
+          {/* {console.log(props.language)} */}
           <div>{props.language}</div>
           <button onClick={handleClick}>{copied ? 'Copied' : 'Copy'}</button>
         </div>
