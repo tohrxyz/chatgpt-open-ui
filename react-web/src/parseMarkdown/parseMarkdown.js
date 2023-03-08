@@ -16,8 +16,8 @@ export default function parseMarkdown(markdown) {
       if (part.startsWith('```')) {
         // extracts language and code from the string codeblock
         let matches = part.match(/^```(\S*)\n([\s\S]*)\n```$/);
-        let language = matches[1];
-        let code = matches[2];
+        let language = matches?.[1] ?? '';
+        let code = matches?.[2] ?? '';
 
         return (
             <Codeblock key={index} language={language}>
