@@ -20,7 +20,7 @@ export default function parseMarkdown(markdown) {
         let code = matches?.[2] ?? '';
 
         return (
-            <Codeblock key={index} language={language}>
+            <Codeblock key={index} language={correctLanguage(language)}>
               {code.trim()}
             </Codeblock>
         );
@@ -37,4 +37,19 @@ export default function parseMarkdown(markdown) {
 
   // if no parsing is needed, returns original string
   return markdown;
+}
+
+// converts language names to the ones used by Prism.js
+function correctLanguage(language) {
+  
+  // convert language to lowercase
+  language = language.toLowerCase();
+  
+  switch(language) {
+    case "vue": return "js";
+    case "react": return "js";
+    case "c++": return "cpp";
+    case "c#": return "cs";
+    default: return language;
+  }
 }
