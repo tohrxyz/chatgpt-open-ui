@@ -19,6 +19,7 @@ function App() {
     setParsedResult(parseMarkdown(result));
   }, [result]);
 
+  // gets api key from cookies and local storage and sets it into api key input field
   useEffect(() => {
     const storedApiKey = Cookies.get("apiKey");
     const storedApiKey2 = localStorage.getItem("apiKey");
@@ -52,6 +53,7 @@ function App() {
     }
   }
 
+  // saves api key to cookies and local storage
   const handleApiKeySave = (e) => {
     e.preventDefault();
     Cookies.set('apiKey', apiKey);
@@ -77,7 +79,8 @@ function App() {
           className="border-2 rounded border-blue-400 p-2 mb-1"
         />
 
-        <div className="flex flex-row justify-between">
+        {/* container for show api key checkbox and save api key button */}
+        <div className="flex flex-row justify-between mb-6 mt-4">
          {/* handles show api key on/off */} 
           <div className="text-end">
             <label htmlFor="show-password" className='mb-3 font-bold mr-5'>Show API key:</label>
