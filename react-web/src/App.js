@@ -19,6 +19,17 @@ function App() {
     setParsedResult(parseMarkdown(result));
   }, [result]);
 
+  useEffect(() => {
+    const storedApiKey = Cookies.get("apiKey");
+    const storedApiKey2 = localStorage.getItem("apiKey");
+    if (storedApiKey) {
+      setApiKey(storedApiKey);
+    }
+    if (storedApiKey2) {
+      setApiKey(storedApiKey2);
+    }
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -44,6 +55,7 @@ function App() {
   const handleApiKeySave = (e) => {
     e.preventDefault();
     Cookies.set('apiKey', apiKey);
+    localStorage.setItem('apiKey', apiKey);
   }
 
   return (
