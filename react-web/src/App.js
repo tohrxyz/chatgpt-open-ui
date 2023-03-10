@@ -94,7 +94,7 @@ function App() {
           <div>
             <button
               onClick={handleApiKeySave}
-              className="bg-blue-500 text-white py-1 px-2 rounded text-center w-50 text-md flex justify-center"
+              className="bg-blue-500 text-white py-1 px-2 rounded text-center w-50 text-md flex justify-center hover:bg-blue-800"
             >
               Save API Key
             </button>
@@ -114,7 +114,7 @@ function App() {
 
         {/* handles button submit */}
         <div className="flex justify-center">
-          <button type="submit" className="bg-blue-500 text-white py-3 px-4 rounded text-center w-60 flex justify-center" disabled={loading}>
+          <button type="submit" className="bg-blue-500 text-white py-3 px-4 rounded text-center w-60 flex justify-center hover:bg-blue-800" disabled={loading}>
             
             {/* when loading spinner is displayed, otherwise button is enabled */}
             {loading ? 
