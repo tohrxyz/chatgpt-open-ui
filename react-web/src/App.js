@@ -18,6 +18,14 @@ function App() {
     setParsedResult(parseMarkdown(result));
   }, [result]);
 
+  // gets api key from cookies and local storage and sets it into api key input field
+  useEffect(() => {
+    const storedApiKey = localStorage.getItem("apiKey");
+    if (storedApiKey) {
+      setApiKey(storedApiKey);
+    }
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -40,6 +48,12 @@ function App() {
     }
   }
 
+  // saves api key to cookies and local storage
+  const handleApiKeySave = (e) => {
+    e.preventDefault();
+    localStorage.setItem('apiKey', apiKey);
+  }
+
   return (
     <div className="container mx-auto py-4 max-w-3xl">
 
@@ -58,15 +72,29 @@ function App() {
           onChange={(e) => setApiKey(e.target.value)}
           className="border-2 rounded border-blue-400 p-2 mb-1"
         />
-        {/* handles show api key on/off */}
-        <div className="text-end">
-          <label htmlFor="show-password" className='mb-3 font-bold mr-5'>Show API key:</label>
-          <input
-            type="checkbox"
-            onClick={showPassword}
-            id="show-password"
-          />
+
+        {/* container for show api key checkbox and save api key button */}
+        <div className="flex flex-row justify-between mb-6 mt-4">
+         {/* handles show api key on/off */} 
+          <div className="text-end">
+            <label htmlFor="show-password" className='mb-3 font-bold mr-5'>Show API key:</label>
+            <input
+              type="checkbox"
+              onClick={showPassword}
+              id="show-password"
+            />
+          </div>
+
+          <div>
+            <button
+              onClick={handleApiKeySave}
+              className="bg-blue-500 text-white py-1 px-2 rounded text-center w-50 text-md flex justify-center hover:bg-blue-800"
+            >
+              Save API Key
+            </button>
+          </div>
         </div>
+
 
         {/* handles text prompt from user */}
         <label htmlFor="input-text" className="mb-2 font-bold">Input Text</label>
@@ -80,7 +108,7 @@ function App() {
 
         {/* handles button submit */}
         <div className="flex justify-center">
-          <button type="submit" className="bg-blue-500 text-white py-3 px-4 rounded text-center w-60 flex justify-center" disabled={loading}>
+          <button type="submit" className="bg-blue-500 text-white py-3 px-4 rounded text-center w-60 flex justify-center hover:bg-blue-800" disabled={loading}>
             
             {/* when loading spinner is displayed, otherwise button is enabled */}
             {loading ? 
