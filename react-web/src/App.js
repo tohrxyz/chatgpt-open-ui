@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import onSubmit from './api/api';
 import HashLoader from 'react-spinners/HashLoader';
 import parseMarkdown from './parseMarkdown/parseMarkdown';
+import Cookies from 'js-cookie';
 
 function App() {
   const [apiKey, setApiKey] = useState("");
@@ -40,6 +41,11 @@ function App() {
     }
   }
 
+  const handleApiKeySave = (e) => {
+    e.preventDefault();
+    Cookies.set('apiKey', apiKey);
+  }
+
   return (
     <div className="container mx-auto py-4 max-w-3xl">
 
@@ -58,15 +64,28 @@ function App() {
           onChange={(e) => setApiKey(e.target.value)}
           className="border-2 rounded border-blue-400 p-2 mb-1"
         />
-        {/* handles show api key on/off */}
-        <div className="text-end">
-          <label htmlFor="show-password" className='mb-3 font-bold mr-5'>Show API key:</label>
-          <input
-            type="checkbox"
-            onClick={showPassword}
-            id="show-password"
-          />
+
+        <div className="flex flex-row justify-between">
+         {/* handles show api key on/off */} 
+          <div className="text-end">
+            <label htmlFor="show-password" className='mb-3 font-bold mr-5'>Show API key:</label>
+            <input
+              type="checkbox"
+              onClick={showPassword}
+              id="show-password"
+            />
+          </div>
+
+          <div>
+            <button
+              onClick={handleApiKeySave}
+              className="bg-blue-500 text-white py-1 px-2 rounded text-center w-50 text-md flex justify-center"
+            >
+              Save API Key
+            </button>
+          </div>
         </div>
+
 
         {/* handles text prompt from user */}
         <label htmlFor="input-text" className="mb-2 font-bold">Input Text</label>
