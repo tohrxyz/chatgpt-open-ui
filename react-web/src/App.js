@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import onSubmit from './api/api';
 import HashLoader from 'react-spinners/HashLoader';
 import parseMarkdown from './parseMarkdown/parseMarkdown';
-import Cookies from 'js-cookie';
 
 function App() {
   const [apiKey, setApiKey] = useState("");
@@ -21,13 +20,9 @@ function App() {
 
   // gets api key from cookies and local storage and sets it into api key input field
   useEffect(() => {
-    const storedApiKey = Cookies.get("apiKey");
-    const storedApiKey2 = localStorage.getItem("apiKey");
+    const storedApiKey = localStorage.getItem("apiKey");
     if (storedApiKey) {
       setApiKey(storedApiKey);
-    }
-    if (storedApiKey2) {
-      setApiKey(storedApiKey2);
     }
   }, []);
 
@@ -56,7 +51,6 @@ function App() {
   // saves api key to cookies and local storage
   const handleApiKeySave = (e) => {
     e.preventDefault();
-    Cookies.set('apiKey', apiKey);
     localStorage.setItem('apiKey', apiKey);
   }
 
