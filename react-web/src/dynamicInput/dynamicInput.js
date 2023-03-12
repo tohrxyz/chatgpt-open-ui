@@ -1,5 +1,3 @@
-
-
 function getTextareaRowsCount(textarea) {
     const styles = window.getComputedStyle(textarea);
     const lineHeight = parseInt(styles.lineHeight);
