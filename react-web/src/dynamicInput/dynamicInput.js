@@ -30,6 +30,18 @@ function allowTextareasToDynamicallyResize() {
         e.target.style.height = rows * lineHeight + 'px';
       });
       textareas[i].style.overflowY = 'hidden';
+      
+      // scrolls to the bottom of the textarea when it is focused
+      // this is to prevent the textarea from being hidden behind the keyboard on mobile
+      textareas[i].addEventListener('focus', (e) => {
+          let scrollY = window.scrollY;
+          let viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+          let top = e.target.getBoundingClientRect().top;
+          let height = e.target.getBoundingClientRect().height;
+          if (top + height > viewportHeight) {
+            window.scrollTo(0, scrollY + top + height - viewportHeight);
+          }
+        });
     }
 }
 
