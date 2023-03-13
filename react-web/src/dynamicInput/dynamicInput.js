@@ -1,11 +1,12 @@
-function getTextareaRowsCount(textarea) {
-    const styles = window.getComputedStyle(textarea);
-    const lineHeight = parseInt(styles.lineHeight);
-    const borderSize = parseInt(styles.borderTopWidth) + parseInt(styles.borderBottomWidth);
-    const paddingSize = parseInt(styles.paddingTop) + parseInt(styles.paddingBottom);
-    const contentHeight = textarea.scrollHeight - paddingSize - borderSize;
-    const rowsCount = Math.ceil(contentHeight / lineHeight);
-    return rowsCount;
+function allowTextareasToDynamicallyResize() {
+    let textareas = document.getElementsByTagName('textarea');
+    for (let i = 0; i < textareas.length; i++) {
+      textareas[i].style.height = textareas[i].scrollHeight + 'px';
+      textareas[i].addEventListener('input', (e) => {
+        e.target.style.height = e.target.scrollHeight + 'px';
+      });
+      textareas[i].style.overflowY = 'hidden';
+    }
 }
 
-export default getTextareaRowsCount;
+export default allowTextareasToDynamicallyResize;
