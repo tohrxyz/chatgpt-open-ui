@@ -1,9 +1,8 @@
 import './App.css';
-import { useEffect, useState, useRef} from 'react'
+import { useEffect, useState} from 'react'
 import onSubmit from './api/api';
 import HashLoader from 'react-spinners/HashLoader';
 import parseMarkdown from './parseMarkdown/parseMarkdown';
-import getTextareaRowsCount from './dynamicInput/dynamicInput'
 import allowTextareasToDynamicallyResize from './dynamicInput/dynamicInput';
 
 function App() {
@@ -56,6 +55,7 @@ function App() {
     localStorage.setItem('apiKey', apiKey);
   }
 
+  // update textarea height on input
   useEffect(() => {
     allowTextareasToDynamicallyResize();
   }, []);
