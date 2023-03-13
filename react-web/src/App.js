@@ -1,22 +1,17 @@
 import './App.css';
-import { useEffect, useState, useRef} from 'react'
+import { useEffect, useState} from 'react'
 import onSubmit from './api/api';
 import HashLoader from 'react-spinners/HashLoader';
 import parseMarkdown from './parseMarkdown/parseMarkdown';
-import getTextareaRowsCount from './dynamicInput/dynamicInput'
+import allowTextareasToDynamicallyResize from './dynamicInput/dynamicInput';
 
 function App() {
-  const MAX_INPUT_ROWS = 6;
-  const MIN_INPUT_ROWS = 1;
-
   const [apiKey, setApiKey] = useState("");
   const [inputText, setInputText] = useState("");
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(false);
   const [parsedResult, setParsedResult] = useState("");
-  const [rows, setRows] = useState(MIN_INPUT_ROWS);
-  const textareaRef = useRef(null);
 
   // each time a result is recieved from the API,
   // parses it from plain text to elements
@@ -60,17 +55,10 @@ function App() {
     localStorage.setItem('apiKey', apiKey);
   }
 
+  // update textarea height on input
   useEffect(() => {
-    setRows(getTextareaRowsCount(textareaRef.current));
-  }, [inputText]);
-
-  useEffect(() => {
-    if (rows >= MAX_INPUT_ROWS) {
-      textareaRef.current.style.overflowY = 'scroll';
-    } else {
-      textareaRef.current.style.overflowY = 'hidden';
-    }
-  }, [rows]);
+    allowTextareasToDynamicallyResize();
+  }, []);
 
   return (
     <div className="container mx-auto py-4 max-w-3xl">
@@ -121,8 +109,7 @@ function App() {
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
           className="border-2 rounded-xl border-blue-500 p-3 mb-10 h-auto max-h-none resize-none"
-          rows={rows > MAX_INPUT_ROWS ? MAX_INPUT_ROWS : rows}
-          ref={textareaRef}
+          rows={1}
         ></textarea>
 
         {/* handles button submit */}
